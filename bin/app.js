@@ -24,7 +24,7 @@ const pdf = require('express-dom-pdf').plugin;
 
 const app = require('express')();
 
-app.get('/', dom(function(mw, settings, request, response) {
+app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
 	var q = request.query;
 	settings.view = q.url;
 	settings.allow = "all";
