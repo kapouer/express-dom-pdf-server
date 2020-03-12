@@ -1,0 +1,19 @@
+{
+  "name": "express-dom-pdf-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kapouer/express-dom-pdf-server.git"
+  },
+  "author": "Jérémy Lal <kapouer@melix.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kapouer/express-dom-pdf-server/issues"
+  },
+  "homepage": "https://github.com/kapouer/express-dom-pdf-server#readme"
+}
