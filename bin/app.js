@@ -26,6 +26,11 @@ const app = require('express')();
 
 app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
 	var q = request.query;
+	if (!q.url) {
+		response.statusCode = 400;
+		response.statusText = "Bad parameter: url";
+		return;
+	}
 	settings.view = q.url;
 	settings.allow = "all";
 	settings.pdf = {params: {}};
@@ -56,6 +61,7 @@ app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
 }));
 
 const listener = app.listen(opts.port, function() {
+	console.info("mount", opts.mount);
 	console.info("port", listener.address().port);
 });
 
