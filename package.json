@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "express-dom-pdf": "bin/app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kapouer/express-dom-pdf-server.git"
@@ -15,5 +18,12 @@
   "bugs": {
     "url": "https://github.com/kapouer/express-dom-pdf-server/issues"
   },
-  "homepage": "https://github.com/kapouer/express-dom-pdf-server#readme"
+  "homepage": "https://github.com/kapouer/express-dom-pdf-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-dom": "^5.13.2",
+    "express-dom-pdf": "^1.2.1",
+    "rc": "^1.2.8",
+    "toml": "^3.0.0"
+  }
 }
