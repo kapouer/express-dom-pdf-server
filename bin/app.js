@@ -2,6 +2,7 @@ const rc = require('rc');
 const toml = require('toml');
 const dom = require('express-dom');
 const Path = require('path');
+const URL = require('url');
 
 const moduleRoot = Path.dirname(Path.dirname(module.filename));
 const pkgOpts = Object.assign({}, require(Path.join(moduleRoot, 'package.json')));
@@ -32,7 +33,9 @@ app.get(opts.mount, dom(function(mw, settings, request, response) {
 		response.statusText = "Bad parameter: url";
 		return;
 	}
-	settings.view = q.url;
+
+	settings.location = settings.view = URL.parse(q.url, true);
+	settings.view.headers = {};
 	settings.allow = "all";
 	settings.pdf = {params: {}};
 
@@ -53,14 +56,12 @@ app.get(opts.mount, dom(function(mw, settings, request, response) {
 	if (q.orientation) params.orientation = q.orientation;
 
 	if (q.cookiename && q.cookievalue) {
-		settings.cookies = `${q.cookiename}=${q.cookievalue}`;
+		settings.view.headers.cookie = `${q.cookiename}=${q.cookievalue}`;
 	}
 
 	if (q.file) params.title = q.file;
 
-	mw.load({plugins: [dom.plugins.cookies({
-		[q.cookiename]: true
-	}), pdf]});
+	mw.load({plugins: [pdf]});
 }));
 
 const listener = app.listen(opts.port, function() {
