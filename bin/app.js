@@ -39,7 +39,7 @@ app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
 
 	params.paper = q.paper || "iso_a4";
 
-	params.margins = q.margins || "0.25in"; // 0.25in is the default
+	params.margins = q.margins || "18pt"; // 0.25in is the default, but use pt it's better supported
 	if (q.fullpage == 1) params.margins = 0;
 
 	if (q.enablejs == 0) settings.filters = [function() {
