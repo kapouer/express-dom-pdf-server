@@ -9,6 +9,7 @@ const opts = rc(pkgOpts.name, {
 	cwd: process.cwd(),
 	env: pkgOpts.env || process.env.NODE_ENV || 'development',
 	name: pkgOpts.name,
+	mount: '*',
 	version: pkgOpts.version.split('.').slice(0, 2).join('.'),
 	pool: {
 		min: 0,
@@ -24,7 +25,7 @@ const pdf = require('express-dom-pdf').plugin;
 
 const app = require('express')();
 
-app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
+app.get(opts.mount, dom(function(mw, settings, request, response) {
 	var q = request.query;
 	if (!q.url) {
 		response.statusCode = 400;
@@ -57,7 +58,9 @@ app.get(opts.mount || '*', dom(function(mw, settings, request, response) {
 
 	if (q.file) params.title = q.file;
 
-	mw.load({plugins: [pdf]});
+	mw.load({plugins: [dom.plugins.cookies({
+		[q.cookiename]: true
+	}), pdf]});
 }));
 
 const listener = app.listen(opts.port, function() {
